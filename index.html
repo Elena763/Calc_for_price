@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="title-page">
+        <h1>
+            <span id="homework"> Домашнее задание 16 недели </span><br>
+        </h1>
+    </div>
+    <div class="container" id="container">
+        <h2>Калькулятор расчёта стоимости автомобиля в зависимости от комплектации.</h2>
+        <h3>Оцените свою машину за 1 минуту</h3>
+        <p class="text" id="text">Представляю вам простой и понятный калькулятор для оценки вашего автомобиля. <br>
+            Узнайте стоимость Вашего автомобиля всего за 1 минуту.</p>
+        <div>
+            <form class="form" id="form">
+                <p class="radio_par">Марка</p>
+                <select name="marka" id="marka" required onchange="checkModel(); calculatePrice()">
+                    <option>Марка</option>
+                    <option value="Audi">Audi</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Mazda">Mazda</option>
+                    <option value="Mercedes">Mercedes</option>
+                </select>
+                <p class="radio_par" id="par_model">Модель</p>
+                <select name="model" id="model" required onchange="checkPrice(); calculatePrice()">
+                    <option value="" disabled>Модель</option>
+                </select>
+                <p class="radio_par">Год выпуска</p>
+                <select name="year" id="year" required onchange="calculatePrice()">
+                    <option>Год выпуска</option>
+                    <option value="2023" selected>2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>
+                    <option value="2013">2013</option>
+                    <option value="2012">2012</option>
+                    <option value="2011">2011</option>
+                    <option value="2010">2010</option>
+                    <option value="2009">2009</option>
+                    <option value="2008">2008</option>
+                </select>
+                <p class="radio_par">Коробка передач:</p>
+                <select name="transmission" id="transmission" onchange="calculatePrice()">
+                    <option>Коробка передач</option>
+                    <option value="AT" selected>АКПП</option>
+                    <option value="MT">МКПП</option>
+                    <option value="Robot">Робот</option>
+                    <option value="Variator">Вариатор</option>
+                </select>
+                <p class="radio_par">Объем двигателя, л:</p>
+                <input class="volume" id="volume" type="number" placeholder="от 1.1 до 3.5 л." min="1.1" max="3.5" step="0.1" value="1.6" onchange="calculatePrice()">
+                <p class="radio_par">Тип топлива:</p>
+                <div class="radio_fuel" id="radioFuel">
+                    <input class="radioinput" type="radio" id="petrol" name="fuel" value="petrol" checked onclick="calculatePrice();">
+                    <label for="petrol">Бензин</label>
+
+                    <input class="radioinput" type="radio" id="diesel" name="fuel" value="diesel" onclick="calculatePrice();">
+                    <label for="diesel">Дизель</label>
+
+                    <input class="radioinput" type="radio" id="electric" name="fuel" value="electric" onclick="calculatePrice();">
+                    <label for="electric">Электрическое </label>
+
+                    <input class="radioinput" type="radio" id="gas" name="fuel" value="gas">
+                    <label for="gas">Газ</label>
+                </div>
+                <p class="radio_par">Состояние автомобиля:</p>
+                <div class="radio_PTS" id="condition">
+                    <input class="radioinput" type="radio" id="new" name="pts" value="new" onclick="calculatePrice();">
+                    <label for="new">Новый</label>
+
+                    <input class="radioinput" type="radio" id="old" name="pts" value="old" onclick="calculatePrice();">
+                    <label for="old">Подержанный</label>
+                </div>
+                <p class="radio_par" id="p_owner" style="display: none;">Количество владельцев <br> по ПТС:</p>
+                <div class="owner" id="div_owner" style="display: none;">
+                    <input class="radioinput" type="radio" id="one" name="owner" value="one" checked onclick="calculatePrice();">
+                    <label for="one">1</label>
+
+                    <input class="radioinput" type="radio" id="two" name="owner" value="two" onclick="calculatePrice();">
+                    <label for="two">2</label>
+
+                    <input class="radioinput" type="radio" id="three" name="owner" value="three" onclick="calculatePrice();">
+                    <label for="three">3</label>
+
+                    <input class="radioinput" type="radio" id="four" name="owner" value="four" onclick="calculatePrice();">
+                    <label for="four">4 и более</label>
+                </div>
+                <p class="radio_par">Выберите способ оплаты:</p>
+                <div class="payment" id="payment">
+                    <input class="radioinput" type="radio" id="card" name="pay" value="card" onclick="calculatePrice();">
+                    <label for="card">Карта</label>
+
+                    <input class="radioinput" type="radio" id="cash" name="pay" value="cash" checked onclick="calculatePrice();">
+                    <label for="cash">Наличные</label>
+
+                    <input class="radioinput" type="radio" id="bill" name="pay" value="bill" onclick="calculatePrice();">
+                    <label for="bill">По счёту</label>
+                </div>
+                <p class="totaltext" id="totaltext" style="display: none;">Ваш автомобиль <br> оценивается в: </p>
+                <p class="totalprice" id="totalprice" style="display: none;"></p>
+            </form>
+            <div class="button">
+                <button>Рассчитать стоимость</button>
+            </div>
+        </div>
+    </div>
+    <script src="models.js"></script>
+    <script src="prices.js"></script>
+    <script src="script16.js"></script>
+</body>
+</html>
