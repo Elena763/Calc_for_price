@@ -189,7 +189,10 @@ function addTotalPrice() {
     document.getElementById("totaltext").style.display = 'block';
     document.getElementById("totalprice").style.display = 'block';
     let p = document.getElementById("totalprice");
-    p.textContent = `${totalPrice} рублей`;
+    let newPrice = Math.round(totalPrice)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    p.textContent = `${newPrice} рублей`;
     form.reset();
 }
 button.addEventListener("click", addTotalPrice);
