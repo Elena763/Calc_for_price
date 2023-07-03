@@ -13,8 +13,7 @@ let marka = document.getElementById("marka").value;
         ${i} </option>`;
         model.appendChild(newModel);
         };
-    } else {
-        if (marka === 'BMW') {
+    } else if (marka === 'BMW') {
             model.options.length = 0;
             for (let BMWModel of BMWModels) {
                 let a = BMWModel;
@@ -23,31 +22,26 @@ let marka = document.getElementById("marka").value;
                 ${a} </option>`;
                 model.appendChild(newModel);
                 };
-        } else {
-            if (marka === 'Mazda') {
-                model.options.length = 0;
-                for (let MazdaModel of MazdaModels) {
-                    let b = MazdaModel;
-                    let newModel = document.createElement('option');
-                    newModel.innerHTML = `<option value="${b}" id="model `+` ${b}">
-                    ${b} </option>`;
-                    model.appendChild(newModel);
-                    };
-            } else {
-                if (marka === 'Mercedes') {
-                    model.options.length = 0;
-                    for (let MercedesModel of MercedesModels) {
-                        let c = MercedesModel;
-                        let newModel = document.createElement('option');
-                        newModel.innerHTML = `<option value="${c}" id="model `+` ${c}">
-                        ${c} </option>`;
-                        model.appendChild(newModel);
-                        };
-                } else {
-                    alert('Выберите марку');
-                }
-            }
-        }
+    } else if (marka === 'Mazda') {
+        model.options.length = 0;
+        for (let MazdaModel of MazdaModels) {
+            let b = MazdaModel;
+            let newModel = document.createElement('option');
+            newModel.innerHTML = `<option value="${b}" id="model `+` ${b}">
+            ${b} </option>`;
+            model.appendChild(newModel);
+            };
+    } else if (marka === 'Mercedes') {
+        model.options.length = 0;
+        for (let MercedesModel of MercedesModels) {
+            let c = MercedesModel;
+            let newModel = document.createElement('option');
+            newModel.innerHTML = `<option value="${c}" id="model `+` ${c}">
+            ${c} </option>`;
+            model.appendChild(newModel);
+            };
+    } else {
+        alert('Выберите марку');
     }
 };
 //Функция определения цены из массива по модели авто
@@ -61,37 +55,31 @@ function checkPrice() {
                 carPrice = audiprice.price;
             }
         };
-    } else {
-        if (marka === 'BMW') {
-            modelBMW = document.getElementById("model").value;
-            for (let bmwprice of BMWPrices) {
-                if (modelBMW === bmwprice.name) {
-                    carPrice = bmwprice.price;
-                }
-            };
-        } else {
-            if (marka === 'Mazda') {
-                modelMazda = document.getElementById("model").value;
-                for (let mazdaprice of MazdaPrices) {
-                    if (modelMazda === mazdaprice.name) {
-                        carPrice = mazdaprice.price;
-                    }
-                };
-            } else {
-                if (marka === 'Mercedes') {
-                    modelMercedes = document.getElementById("model").value;
-                    for (let mercedesprice of MercedesPrices) {
-                        if (modelMercedes === mercedesprice.name) {
-                            carPrice = mercedesprice.price;
-                        }
-                    };
-                } else {
-                    alert('Выберите модель');
-                }
+    } else if (marka === 'BMW') {
+        modelBMW = document.getElementById("model").value;
+        for (let bmwprice of BMWPrices) {
+            if (modelBMW === bmwprice.name) {
+                carPrice = bmwprice.price;
             }
+        };
+        } else if (marka === 'Mazda') {
+        modelMazda = document.getElementById("model").value;
+        for (let mazdaprice of MazdaPrices) {
+            if (modelMazda === mazdaprice.name) {
+                carPrice = mazdaprice.price;
+            }
+        };
+        } else if (marka === 'Mercedes') {
+        modelMercedes = document.getElementById("model").value;
+        for (let mercedesprice of MercedesPrices) {
+            if (modelMercedes === mercedesprice.name) {
+                carPrice = mercedesprice.price;
+            }
+        };
+        } else {
+            alert('Выберите модель');
         }
-    }
-    return carPrice;
+return carPrice;
 };
 //Функция подсчета цены, в зависимости от выбранных параметров
 function calculatePrice() {
@@ -104,12 +92,10 @@ function calculatePrice() {
     let kTM;
     if (transmissions == 'AT') {
         kTM = 1;
+    } else if (transmissions == 'MT') {
+        kTM = 0.8;
     } else {
-        if (transmissions == 'MT') {
-            kTM = 0.8;
-        } else {
-            kTM = 0.9;
-        }
+        kTM = 0.9;
     }
 
     //Определение коэффициента, применяемого к цене, в зависимости от объема двигателя
@@ -118,20 +104,14 @@ function calculatePrice() {
     let kVolume = 1;
     if (volume <= 1.6) {
         kVolume = 0.8;
+    } else if (volume <= 2) {
+        kVolume = 1;
+    } else if (volume <= 2.5 ) {
+        kVolume = 1.1;
+    } else if (volume <= 3) {
+        kVolume = 1.2;
     } else {
-        if (volume <= 2) {
-            kVolume = 1;
-        } else {
-            if (volume <= 2.5 ) {
-                kVolume = 1.1;
-            } else {
-                if (volume <= 3) {
-                    kVolume = 1.2;
-                } else {
-                    kVolume = 1.25;
-                }
-            }
-        }
+        kVolume = 1.25;
     }
 
     //Определение коэффициента, применяемого к цене, в зависимости от типа топлива
@@ -170,20 +150,14 @@ function calculatePrice() {
     };
     if (cond === 'new') {
         kPTS = 1;
+    } else if (PTS === 'one'){
+        kPTS = 0.98;
+    } else if (PTS === 'two') {
+        kPTS = 0.96;
+    } else if (PTS === 'three') {
+        kPTS = 0.94;
     } else {
-        if (PTS === 'one'){
-            kPTS = 0.98;
-        } else {
-            if (PTS === 'two') {
-                kPTS = 0.96;
-            } else {
-                if (PTS === 'three') {
-                    kPTS = 0.94;
-                } else {
-                    kPTS = 0.92;
-                }
-            }
-        }
+        kPTS = 0.92;
     }
 
     //Определение коэффициента, применяемого к цене, в зависимости от типа оплаты
@@ -196,12 +170,10 @@ function calculatePrice() {
     let kPay = 1;
     if (p === "bill") {
         kPay = 1.03;
+    } else if (p === "card") {
+        kPay = 1.01;
     } else {
-        if (p === "card") {
-            kPay = 1.01;
-        } else {
-            kPay = 1;
-        }
+        kPay = 1;
     }
 
     //Определение конечной цены автомобиля

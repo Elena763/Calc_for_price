@@ -22,7 +22,7 @@
             <form class="form" id="form">
                 <p class="radio_par">Марка</p>
                 <select name="marka" id="marka" required onchange="checkModel(); calculatePrice()">
-                    <option>Марка</option>
+                    <option hidden>Марка</option>
                     <option value="Audi">Audi</option>
                     <option value="BMW">BMW</option>
                     <option value="Mazda">Mazda</option>
@@ -30,7 +30,7 @@
                 </select>
                 <p class="radio_par" id="par_model">Модель</p>
                 <select name="model" id="model" required onchange="checkPrice(); calculatePrice()">
-                    <option value="" disabled>Модель</option>
+                    <option value="" hidden>Модель</option>
                 </select>
                 <p class="radio_par">Год выпуска</p>
                 <select name="year" id="year" required onchange="calculatePrice()">
